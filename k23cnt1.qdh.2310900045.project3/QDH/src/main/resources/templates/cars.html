@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách xe</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>Danh sách xe</h1>
+
+<nav>
+    <a href="/">Trang chủ</a>
+    <a href="/cars" class="active">Sản phẩm</a>
+    <a href="/cars/add" class="btn">Thêm xe mới</a>
+</nav>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Hãng</th>
+        <th>Giá</th>
+        <th>Năm</th>
+        <th>Ảnh</th>
+        <th>Hành động</th>
+    </tr>
+
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.name}"></td>
+        <td th:text="${car.brand.name}"></td>
+        <td th:text="${car.price}"></td>
+        <td th:text="${car.year}"></td>
+        <td><img th:src="@{/images/{img}(img=${car.image})}" width="120"></td>
+        <td>
+            <a th:href="@{/cars/edit/{id}(id=${car.id})}" class="btn">Sửa</a>
+            <a th:href="@{/cars/delete/{id}(id=${car.id})}"
+               onclick="return confirm('Xác nhận xóa?')"
+               class="btn" style="background:#d64545;">Xóa</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
